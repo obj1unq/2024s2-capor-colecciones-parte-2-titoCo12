@@ -1,18 +1,5 @@
-object espada{
-		
-}
+import artefactos.*
 
-object collar {
-
-}
-
-object armadura {
-
-}
-
-object libro {
-	
-}
 
 object castillo {
 	
@@ -31,6 +18,19 @@ object rolando {
 	var property capacidad = 2
 	const casa = castillo
 	const property historia = []
+	var poderBase = 5
+
+	method poderBase() {
+		return poderBase 
+	}
+
+	method poderArtefactos() {
+		return artefactos.sum({artefacto => artefacto.poder(self)})
+	}
+
+	method poderDePelea() {
+		return poderBase + self.poderArtefactos()
+	}
 
 	method encontrar(artefacto) {
 		if(artefactos.size() < capacidad) {
