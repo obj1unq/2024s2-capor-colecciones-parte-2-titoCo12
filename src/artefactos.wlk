@@ -1,6 +1,5 @@
 
 object espada{
-    
     var fueUsado = false
 
     method serUsado() {
@@ -18,8 +17,9 @@ object espada{
 
 }
 
-object collar {
 
+
+object collar {
     var usos = 0
 
     method serUsado() {
@@ -36,16 +36,69 @@ object collar {
 
 }
 
+
+
 object armadura {
+    const poder = 6
+
     method poder(personaje) {
-        personaje
+        return poder
+    }
+
+    method serUsado() {
     }
 
 }
 
+
+
 object libro {
+    var hechizos = []
+
+    method hechizos(_hechizos) {
+        hechizos = _hechizos
+    }
+
+    method poder(personaje) {
+        return if (self.quedanHechizos()) {
+            self.hechizoActual().poderHechizo(personaje)
+        }
+        else {0}
+    }
     
-    method poder(_poder) {
-        return 0
+    method quedanHechizos() {
+        return (not (hechizos.isEmpty()))
+    }
+
+    method serUsado() {
+        hechizos.remove(self.hechizoActual())
+    }
+
+    method hechizoActual() {
+        return hechizos.head()
+    }
+}
+
+
+
+object bendicion {
+    const poder = 4
+
+    method poderHechizo(personaje) {
+        return poder
+    } 
+}
+
+object invisibilidad {
+    
+    method poderHechizo(personaje) {
+        return personaje.poderBase()
+    }
+}
+
+object invocacion {
+
+    method poderHechizo(personaje) {
+        return personaje.artefactoMasFuerteDeHogar().poder(personaje)
     }
 }
